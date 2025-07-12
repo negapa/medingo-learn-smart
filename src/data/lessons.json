@@ -139,6 +139,528 @@
             }
           ]
         }
+      },
+      {
+        "lessonId": "copd_1",
+        "title": "Chronic Obstructive Pulmonary Disease (COPD)",
+        "order": 2,
+        "xpReward": 15,
+        "estimatedTime": "20 min",
+        "infoPage": {
+          "goal": "Learn the symptoms, causes, and management of COPD.",
+          "characters": ["Ava - Curious medical student", "Dr. Ryan - Pulmonologist", "Hossein - Long-term smoker, experiencing fatigue"],
+          "scenes": [
+            {
+              "sceneTitle": "Scene 1: COPD Symptoms",
+              "dialogue": [
+                "Ava: Hossein says he's been coughing for months and gets tired just walking.",
+                "Dr. Ryan: That sounds like classic symptoms of COPD, especially in smokers.",
+                "Ava: So it's not just asthma?",
+                "Dr. Ryan: No. COPD is long-term and gets worse over time."
+              ],
+              "question": {
+                "type": "multiple-choice",
+                "text": "What is a typical cause of COPD?",
+                "options": [
+                  "Asthma",
+                  "Long-term smoking",
+                  "Allergies"
+                ],
+                "correctAnswer": 1,
+                "explanation": "Long-term smoking is the leading cause of COPD, damaging the airways and alveoli over time."
+              }
+            },
+            {
+              "sceneTitle": "Scene 2: Forms of COPD",
+              "dialogue": [
+                "Hossein: Sometimes I even cough up mucus in the morning.",
+                "Ava: That's called chronic bronchitis, right?",
+                "Dr. Ryan: Yes, one of the major forms of COPD, along with emphysema."
+              ],
+              "question": {
+                "type": "multiple-choice",
+                "text": "Which of these is a form of COPD?",
+                "options": [
+                  "Chronic bronchitis",
+                  "Lung cancer",
+                  "Pneumothorax"
+                ],
+                "correctAnswer": 0,
+                "explanation": "Chronic bronchitis is one of the two main forms of COPD, characterized by persistent cough with mucus production."
+              }
+            },
+            {
+              "sceneTitle": "Scene 3: Treatment Approach",
+              "dialogue": [
+                "Ava: Can we reverse the disease?",
+                "Dr. Ryan: Unfortunately, no. But quitting smoking and using bronchodilators can help a lot."
+              ],
+              "question": {
+                "type": "multiple-choice",
+                "text": "Which of the following is a mainstay treatment for COPD?",
+                "options": [
+                  "Bronchodilators",
+                  "Antibiotics",
+                  "Surgery"
+                ],
+                "correctAnswer": 0,
+                "explanation": "Bronchodilators help open the airways and are a cornerstone of COPD treatment."
+              }
+            }
+          ],
+          "finalReview": []
+        }
+      },
+      {
+        "lessonId": "pneumonia_1",
+        "title": "Pneumonia",
+        "order": 3,
+        "xpReward": 15,
+        "estimatedTime": "20 min",
+        "infoPage": {
+          "goal": "Understand pneumonia, its symptoms, types, and basic treatments.",
+          "characters": ["Ava - Medical student", "Dr. Ryan - Pulmonologist", "Zahra - Patient with sudden fever and cough"],
+          "scenes": [
+            {
+              "sceneTitle": "Scene 1: Pneumonia Symptoms",
+              "dialogue": [
+                "Zahra: I suddenly got a fever and deep cough yesterday.",
+                "Ava: That sounds like pneumonia.",
+                "Dr. Ryan: Yes, especially if there's chest pain and sputum."
+              ],
+              "question": {
+                "type": "multiple-choice",
+                "text": "What is a classic sign of pneumonia?",
+                "options": [
+                  "Sneezing",
+                  "Fever with productive cough",
+                  "Swollen lymph nodes"
+                ],
+                "correctAnswer": 1,
+                "explanation": "Fever with productive cough is a hallmark symptom of pneumonia."
+              }
+            },
+            {
+              "sceneTitle": "Scene 2: Pneumonia Causes",
+              "dialogue": [
+                "Ava: What causes it?",
+                "Dr. Ryan: Often bacteria, like Streptococcus pneumoniae, but viruses can also be responsible."
+              ],
+              "question": {
+                "type": "multiple-choice",
+                "text": "What is the most common cause of bacterial pneumonia?",
+                "options": [
+                  "Streptococcus pneumoniae",
+                  "Influenza virus",
+                  "COVID-19"
+                ],
+                "correctAnswer": 0,
+                "explanation": "Streptococcus pneumoniae is the most common bacterial cause of pneumonia."
+              }
+            },
+            {
+              "sceneTitle": "Scene 3: Treatment Considerations",
+              "dialogue": [
+                "Zahra: So I need antibiotics?",
+                "Dr. Ryan: Yes, but only if it's bacterial. Viral ones need rest and support."
+              ],
+              "question": {
+                "type": "multiple-choice",
+                "text": "Which of the following is not effective against viral pneumonia?",
+                "options": [
+                  "Antibiotics",
+                  "Rest",
+                  "Fluids"
+                ],
+                "correctAnswer": 0,
+                "explanation": "Antibiotics are only effective against bacterial infections, not viral pneumonia."
+              }
+            }
+          ],
+          "finalReview": []
+        }
+      }
+    ]
+  },
+  "pharmacology": {
+    "subjectId": "pharmacology",
+    "subjectName": "Pharmacology",
+    "lessons": [
+      {
+        "lessonId": "antibiotics_basics_1",
+        "title": "Antibiotics Basics",
+        "order": 4,
+        "xpReward": 15,
+        "estimatedTime": "20 min",
+        "infoPage": {
+          "goal": "Learn about common antibiotics and when to use them.",
+          "characters": ["Ali - Pharmacy student", "Dr. Farah - Clinical Pharmacologist"],
+          "scenes": [
+            {
+              "sceneTitle": "Scene 1: Appropriate Use",
+              "dialogue": [
+                "Ali: My cousin takes antibiotics for every cold. Is that okay?",
+                "Dr. Farah: No. Colds are viral; antibiotics only work for bacteria."
+              ],
+              "question": {
+                "type": "multiple-choice",
+                "text": "When are antibiotics appropriate?",
+                "options": [
+                  "For all infections",
+                  "For bacterial infections",
+                  "For viral colds"
+                ],
+                "correctAnswer": 1,
+                "explanation": "Antibiotics are only effective against bacterial infections, not viral ones."
+              }
+            },
+            {
+              "sceneTitle": "Scene 2: Antibiotic Resistance",
+              "dialogue": [
+                "Dr. Farah: Misuse causes resistance, which is a huge global problem.",
+                "Ali: So the bacteria become stronger?",
+                "Dr. Farah: Exactly."
+              ],
+              "question": {
+                "type": "multiple-choice",
+                "text": "What does antibiotic resistance mean?",
+                "options": [
+                  "The body becomes immune to antibiotics",
+                  "Bacteria become resistant to antibiotics",
+                  "Viruses are unaffected by antibiotics"
+                ],
+                "correctAnswer": 1,
+                "explanation": "Antibiotic resistance occurs when bacteria evolve mechanisms to survive antibiotic treatment."
+              }
+            }
+          ],
+          "finalReview": []
+        }
+      },
+      {
+        "lessonId": "painkillers_1",
+        "title": "Painkillers (Analgesics)",
+        "order": 5,
+        "xpReward": 15,
+        "estimatedTime": "20 min",
+        "infoPage": {
+          "goal": "Understand NSAIDs, acetaminophen, and opioid uses and risks.",
+          "characters": ["Ali - Student", "Dr. Farah - Pharmacology teacher"],
+          "scenes": [
+            {
+              "sceneTitle": "Scene 1: NSAIDs",
+              "dialogue": [
+                "Ali: I always take ibuprofen for headaches.",
+                "Dr. Farah: That's an NSAID. It reduces pain and inflammation."
+              ],
+              "question": {
+                "type": "multiple-choice",
+                "text": "Which is an NSAID?",
+                "options": [
+                  "Paracetamol",
+                  "Ibuprofen",
+                  "Morphine"
+                ],
+                "correctAnswer": 1,
+                "explanation": "Ibuprofen is a nonsteroidal anti-inflammatory drug (NSAID) that reduces pain and inflammation."
+              }
+            },
+            {
+              "sceneTitle": "Scene 2: Side Effects",
+              "dialogue": [
+                "Dr. Farah: But watch out — NSAIDs can hurt your stomach if overused.",
+                "Ali: What about paracetamol?",
+                "Dr. Farah: Safer on the stomach, but high doses hurt the liver."
+              ],
+              "question": {
+                "type": "multiple-choice",
+                "text": "Which organ is affected by too much acetaminophen (paracetamol)?",
+                "options": [
+                  "Stomach",
+                  "Liver",
+                  "Kidneys"
+                ],
+                "correctAnswer": 1,
+                "explanation": "Excessive acetaminophen can cause liver damage and failure."
+              }
+            }
+          ],
+          "finalReview": []
+        }
+      },
+      {
+        "lessonId": "antihypertensive_1",
+        "title": "Antihypertensive Drugs",
+        "order": 6,
+        "xpReward": 15,
+        "estimatedTime": "20 min",
+        "infoPage": {
+          "goal": "Learn major types of blood pressure medications and how they work.",
+          "characters": ["Ava - Student", "Dr. Farah - Instructor", "Majid - Hypertensive patient"],
+          "scenes": [
+            {
+              "sceneTitle": "Scene 1: ACE Inhibitors",
+              "dialogue": [
+                "Majid: I've been prescribed an ACE inhibitor.",
+                "Ava: What does it do?",
+                "Dr. Farah: It relaxes blood vessels and lowers blood pressure."
+              ],
+              "question": {
+                "type": "multiple-choice",
+                "text": "What do ACE inhibitors do?",
+                "options": [
+                  "Lower blood pressure",
+                  "Increase heart rate",
+                  "Raise cholesterol"
+                ],
+                "correctAnswer": 0,
+                "explanation": "ACE inhibitors work by relaxing blood vessels, which lowers blood pressure."
+              }
+            },
+            {
+              "sceneTitle": "Scene 2: Drug Classes",
+              "dialogue": [
+                "Dr. Farah: Other classes include beta-blockers and calcium channel blockers.",
+                "Ava: So it's not one-size-fits-all?",
+                "Dr. Farah: Exactly."
+              ],
+              "question": {
+                "type": "multiple-choice",
+                "text": "Which of these is not an antihypertensive?",
+                "options": [
+                  "Beta-blockers",
+                  "Antibiotics",
+                  "Calcium channel blockers"
+                ],
+                "correctAnswer": 1,
+                "explanation": "Antibiotics treat infections and do not affect blood pressure."
+              }
+            }
+          ],
+          "finalReview": []
+        }
+      }
+    ]
+  },
+  "pathology": {
+    "subjectId": "pathology",
+    "subjectName": "Pathology",
+    "lessons": [
+      {
+        "lessonId": "inflammation_basics_1",
+        "title": "Inflammation Basics",
+        "order": 7,
+        "xpReward": 15,
+        "estimatedTime": "20 min",
+        "infoPage": {
+          "goal": "Understand the signs and steps of inflammation.",
+          "characters": ["Ava - Student", "Dr. Nima - Pathology professor"],
+          "scenes": [
+            {
+              "sceneTitle": "Scene 1: Signs of Inflammation",
+              "dialogue": [
+                "Ava: What are the signs of inflammation again?",
+                "Dr. Nima: Rubor, calor, tumor, dolor — redness, heat, swelling, pain."
+              ],
+              "question": {
+                "type": "multiple-choice",
+                "text": "Which is not a classic sign of inflammation?",
+                "options": [
+                  "Fever",
+                  "Pain",
+                  "Redness"
+                ],
+                "correctAnswer": 0,
+                "explanation": "The classic signs are redness, heat, swelling, and pain. Fever is systemic, not local."
+              }
+            },
+            {
+              "sceneTitle": "Scene 2: Mechanism",
+              "dialogue": [
+                "Ava: What causes those signs?",
+                "Dr. Nima: Vasodilation and increased permeability of blood vessels."
+              ],
+              "question": {
+                "type": "multiple-choice",
+                "text": "What causes swelling in inflammation?",
+                "options": [
+                  "Increased blood clotting",
+                  "Increased vessel permeability",
+                  "Bacterial toxins"
+                ],
+                "correctAnswer": 1,
+                "explanation": "Increased vessel permeability allows fluid to leak into tissues, causing swelling."
+              }
+            }
+          ],
+          "finalReview": []
+        }
+      },
+      {
+        "lessonId": "necrosis_types_1",
+        "title": "Necrosis Types",
+        "order": 8,
+        "xpReward": 15,
+        "estimatedTime": "20 min",
+        "infoPage": {
+          "goal": "Learn common necrosis types: coagulative, liquefactive, and caseous.",
+          "characters": ["Ava - Student", "Dr. Nima - Pathologist"],
+          "scenes": [
+            {
+              "sceneTitle": "Scene 1: Types of Necrosis",
+              "dialogue": [
+                "Ava: What's the difference between coagulative and liquefactive necrosis?",
+                "Dr. Nima: Coagulative keeps tissue structure, liquefactive turns it mushy."
+              ],
+              "question": {
+                "type": "multiple-choice",
+                "text": "Which organ commonly shows liquefactive necrosis?",
+                "options": [
+                  "Heart",
+                  "Brain",
+                  "Kidney"
+                ],
+                "correctAnswer": 1,
+                "explanation": "The brain commonly shows liquefactive necrosis due to its high lipid content and lack of structural support."
+              }
+            }
+          ],
+          "finalReview": []
+        }
+      },
+      {
+        "lessonId": "cell_injury_1",
+        "title": "Cell Injury and Death",
+        "order": 9,
+        "xpReward": 15,
+        "estimatedTime": "20 min",
+        "infoPage": {
+          "goal": "Understand causes of reversible and irreversible cell damage.",
+          "characters": ["Ava - Student", "Dr. Nima - Pathologist"],
+          "scenes": [
+            {
+              "sceneTitle": "Scene 1: Cell Recovery",
+              "dialogue": [
+                "Ava: Can all injured cells recover?",
+                "Dr. Nima: Only if damage is mild and temporary."
+              ],
+              "question": {
+                "type": "multiple-choice",
+                "text": "What defines irreversible cell injury?",
+                "options": [
+                  "Loss of membrane integrity",
+                  "Mitochondria swelling",
+                  "ATP depletion"
+                ],
+                "correctAnswer": 0,
+                "explanation": "Loss of membrane integrity is the point of no return for cell injury."
+              }
+            }
+          ],
+          "finalReview": []
+        }
+      }
+    ]
+  },
+  "anatomy": {
+    "subjectId": "anatomy",
+    "subjectName": "Anatomy",
+    "lessons": [
+      {
+        "lessonId": "hand_anatomy_1",
+        "title": "Hand Anatomy",
+        "order": 10,
+        "xpReward": 15,
+        "estimatedTime": "20 min",
+        "infoPage": {
+          "goal": "Learn major bones and muscles of the hand.",
+          "characters": ["Ava - Student", "Dr. Mehran - Anatomy teacher"],
+          "scenes": [
+            {
+              "sceneTitle": "Scene 1: Hand Bones",
+              "dialogue": [
+                "Ava: How many bones are in the hand?",
+                "Dr. Mehran: 27 total – carpals, metacarpals, and phalanges."
+              ],
+              "question": {
+                "type": "multiple-choice",
+                "text": "How many bones are in a human hand?",
+                "options": [
+                  "27",
+                  "21",
+                  "30"
+                ],
+                "correctAnswer": 0,
+                "explanation": "The human hand contains 27 bones: 8 carpals, 5 metacarpals, and 14 phalanges."
+              }
+            }
+          ],
+          "finalReview": []
+        }
+      },
+      {
+        "lessonId": "foot_anatomy_1",
+        "title": "Foot Anatomy",
+        "order": 11,
+        "xpReward": 15,
+        "estimatedTime": "20 min",
+        "infoPage": {
+          "goal": "Learn key foot bones and arches.",
+          "characters": ["Ava - Student", "Dr. Mehran - Anatomy teacher"],
+          "scenes": [
+            {
+              "sceneTitle": "Scene 1: Foot Bones",
+              "dialogue": [
+                "Ava: What's the largest bone in the foot?",
+                "Dr. Mehran: The calcaneus, also called the heel bone."
+              ],
+              "question": {
+                "type": "multiple-choice",
+                "text": "Which is the largest bone in the foot?",
+                "options": [
+                  "Tibia",
+                  "Calcaneus",
+                  "Tarsal"
+                ],
+                "correctAnswer": 1,
+                "explanation": "The calcaneus (heel bone) is the largest bone in the foot."
+              }
+            }
+          ],
+          "finalReview": []
+        }
+      },
+      {
+        "lessonId": "thoracic_cavity_1",
+        "title": "Thoracic Cavity",
+        "order": 12,
+        "xpReward": 15,
+        "estimatedTime": "20 min",
+        "infoPage": {
+          "goal": "Understand the contents and borders of the thoracic cavity.",
+          "characters": ["Ava - Student", "Dr. Mehran - Anatomy teacher"],
+          "scenes": [
+            {
+              "sceneTitle": "Scene 1: Thoracic Contents",
+              "dialogue": [
+                "Ava: What's inside the thoracic cavity?",
+                "Dr. Mehran: Lungs, heart, trachea, and esophagus — all protected by the rib cage."
+              ],
+              "question": {
+                "type": "multiple-choice",
+                "text": "Which of the following is not in the thoracic cavity?",
+                "options": [
+                  "Liver",
+                  "Heart",
+                  "Lungs"
+                ],
+                "correctAnswer": 0,
+                "explanation": "The liver is located in the abdominal cavity, not the thoracic cavity."
+              }
+            }
+          ],
+          "finalReview": []
+        }
       }
     ]
   }

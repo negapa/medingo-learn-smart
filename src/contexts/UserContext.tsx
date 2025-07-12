@@ -90,21 +90,25 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const newXP = user.xp + amount;
     const newLevel = Math.floor(newXP / 100) + 1; // Level up every 100 XP
     
-    setUser({
+    const updatedUser = {
       ...user,
       xp: newXP,
       level: newLevel,
-    });
+    };
+    setUser(updatedUser);
+    localStorage.setItem('medingo_user', JSON.stringify(updatedUser));
   };
 
   const completeLesson = (lessonId: string) => {
     if (!user) return;
     if (user.completedLessons.includes(lessonId)) return;
     
-    setUser({
+    const updatedUser = {
       ...user,
       completedLessons: [...user.completedLessons, lessonId],
-    });
+    };
+    setUser(updatedUser);
+    localStorage.setItem('medingo_user', JSON.stringify(updatedUser));
   };
 
   const updateStreak = () => {
