@@ -55,7 +55,8 @@ const Lesson = () => {
   const handleNext = () => {
     if (!showAnswer && selectedAnswer !== null) {
       setShowAnswer(true);
-      const isCorrect = selectedAnswer === currentContent.question.correctAnswer;
+      const correctAnswer = currentContent.question?.correctAnswer ?? currentContent.correctAnswer;
+      const isCorrect = selectedAnswer === correctAnswer;
       if (isCorrect) {
         setScore(prev => prev + 1);
       }
@@ -94,7 +95,8 @@ const Lesson = () => {
         : 'border-border hover:border-primary/50';
     }
     
-    const isCorrect = optionIndex === currentContent.question.correctAnswer;
+    const correctAnswer = currentContent.question?.correctAnswer ?? currentContent.correctAnswer;
+    const isCorrect = optionIndex === correctAnswer;
     const isSelected = optionIndex === selectedAnswer;
     
     if (isCorrect) {
@@ -213,10 +215,10 @@ const Lesson = () => {
                     >
                       <div className="flex items-center justify-between">
                         <span>{option}</span>
-                        {showAnswer && index === (currentContent.question?.correctAnswer || currentContent.correctAnswer) && (
+                        {showAnswer && index === (currentContent.question?.correctAnswer ?? currentContent.correctAnswer) && (
                           <CheckCircle className="w-5 h-5 text-completed" />
                         )}
-                        {showAnswer && index === selectedAnswer && index !== (currentContent.question?.correctAnswer || currentContent.correctAnswer) && (
+                        {showAnswer && index === selectedAnswer && index !== (currentContent.question?.correctAnswer ?? currentContent.correctAnswer) && (
                           <X className="w-5 h-5 text-destructive" />
                         )}
                       </div>
