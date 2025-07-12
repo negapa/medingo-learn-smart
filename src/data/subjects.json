@@ -1,0 +1,40 @@
+{
+  "subjects": [
+    {
+      "id": "lungs_basics",
+      "name": "Lungs - Basics",
+      "description": "Learn fundamental concepts about respiratory system",
+      "icon": "🫁",
+      "color": "physiology",
+      "totalLessons": 5,
+      "estimatedTime": "2 hours"
+    },
+    {
+      "id": "anatomy_basics",
+      "name": "Anatomy - Basics", 
+      "description": "Essential human anatomy fundamentals",
+      "icon": "🦴",
+      "color": "anatomy",
+      "totalLessons": 8,
+      "estimatedTime": "3 hours"
+    },
+    {
+      "id": "pharmacology_intro",
+      "name": "Pharmacology - Intro",
+      "description": "Introduction to drug mechanisms and effects",
+      "icon": "💊",
+      "color": "pharmacology", 
+      "totalLessons": 6,
+      "estimatedTime": "2.5 hours"
+    },
+    {
+      "id": "pathology_essentials",
+      "name": "Pathology - Essentials",
+      "description": "Disease processes and diagnostic principles",
+      "icon": "🔬",
+      "color": "pathology",
+      "totalLessons": 7,
+      "estimatedTime": "3.5 hours"
+    }
+  ]
+}

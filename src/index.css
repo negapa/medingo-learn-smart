@@ -2,39 +2,87 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* Medingo Design System - Duolingo-inspired medical learning app
+All colors MUST be HSL. Medical-themed with gamification elements.
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Base colors - Clean medical whites and soft backgrounds */
+    --background: 0 0% 98%;
+    --foreground: 215 25% 15%;
 
+    /* Card system - Clean medical cards */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 215 25% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 215 25% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary - Medical blue (trust, professionalism) */
+    --primary: 215 85% 55%;
+    --primary-foreground: 0 0% 98%;
+    --primary-hover: 215 85% 50%;
+    --primary-light: 215 85% 85%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary - Success green (progress, completion) */
+    --secondary: 142 80% 45%;
+    --secondary-foreground: 0 0% 98%;
+    --secondary-hover: 142 80% 40%;
+    --secondary-light: 142 80% 85%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Accent - Warm orange (engagement, energy) */
+    --accent: 25 95% 55%;
+    --accent-foreground: 0 0% 98%;
+    --accent-hover: 25 95% 50%;
+    --accent-light: 25 95% 85%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Warning - Medical red (errors, important info) */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --destructive-light: 0 84% 85%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Muted colors */
+    --muted: 220 15% 95%;
+    --muted-foreground: 215 15% 45%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Border and input colors */
+    --border: 220 15% 90%;
+    --input: 220 15% 95%;
+    --ring: 215 85% 55%;
+
+    /* Medical subject colors */
+    --anatomy: 350 85% 60%;
+    --physiology: 215 85% 55%; 
+    --pharmacology: 270 85% 60%;
+    --pathology: 25 95% 55%;
+    --biochemistry: 142 80% 45%;
+
+    /* Gamification colors */
+    --xp-gold: 45 95% 55%;
+    --streak-fire: 15 95% 55%;
+    --level-purple: 270 85% 60%;
+
+    /* Progress states */
+    --locked: 220 15% 80%;
+    --active: 215 85% 55%;
+    --completed: 142 80% 45%;
+    --mastered: 45 95% 55%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-hover)));
+    --gradient-success: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--secondary-hover)));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--accent-hover)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary-light)), hsl(var(--accent-light)));
+
+    /* Shadows */
+    --shadow-card: 0 2px 8px hsl(var(--primary) / 0.1);
+    --shadow-button: 0 4px 12px hsl(var(--primary) / 0.2);
+    --shadow-floating: 0 8px 24px hsl(var(--primary) / 0.15);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --radius: 0.5rem;
 
@@ -56,41 +104,77 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    /* Base colors - Dark medical theme */
+    --background: 215 25% 8%;
+    --foreground: 0 0% 95%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    /* Card system - Dark medical cards */
+    --card: 215 25% 10%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 215 25% 10%;
+    --popover-foreground: 0 0% 95%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    /* Primary - Medical blue (adjusted for dark) */
+    --primary: 215 85% 60%;
+    --primary-foreground: 0 0% 98%;
+    --primary-hover: 215 85% 55%;
+    --primary-light: 215 85% 25%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    /* Secondary - Success green (adjusted for dark) */
+    --secondary: 142 80% 50%;
+    --secondary-foreground: 0 0% 98%;
+    --secondary-hover: 142 80% 45%;
+    --secondary-light: 142 80% 20%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    /* Accent - Warm orange (adjusted for dark) */
+    --accent: 25 95% 60%;
+    --accent-foreground: 0 0% 98%;
+    --accent-hover: 25 95% 55%;
+    --accent-light: 25 95% 25%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    /* Warning - Medical red (adjusted for dark) */
+    --destructive: 0 84% 65%;
+    --destructive-foreground: 0 0% 98%;
+    --destructive-light: 0 84% 25%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    /* Muted colors - Dark theme */
+    --muted: 215 25% 15%;
+    --muted-foreground: 0 0% 65%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Border and input colors - Dark theme */
+    --border: 215 25% 20%;
+    --input: 215 25% 15%;
+    --ring: 215 85% 60%;
+
+    /* Medical subject colors - Dark theme */
+    --anatomy: 350 85% 65%;
+    --physiology: 215 85% 60%; 
+    --pharmacology: 270 85% 65%;
+    --pathology: 25 95% 60%;
+    --biochemistry: 142 80% 50%;
+
+    /* Gamification colors - Dark theme */
+    --xp-gold: 45 95% 60%;
+    --streak-fire: 15 95% 60%;
+    --level-purple: 270 85% 65%;
+
+    /* Progress states - Dark theme */
+    --locked: 215 25% 30%;
+    --active: 215 85% 60%;
+    --completed: 142 80% 50%;
+    --mastered: 45 95% 60%;
+
+    /* Gradients - Dark theme */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-hover)));
+    --gradient-success: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--secondary-hover)));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--accent-hover)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary-light)), hsl(var(--accent-light)));
+
+    /* Shadows - Dark theme */
+    --shadow-card: 0 2px 8px hsl(0 0% 0% / 0.3);
+    --shadow-button: 0 4px 12px hsl(0 0% 0% / 0.4);
+    --shadow-floating: 0 8px 24px hsl(0 0% 0% / 0.5);
   }
 }
 

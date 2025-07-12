@@ -1,0 +1,145 @@
+{
+  "lungs_basics": {
+    "subjectId": "lungs_basics",
+    "subjectName": "Lungs - Basics",
+    "lessons": [
+      {
+        "lessonId": "pulmonary_hypertension_1",
+        "title": "Pulmonary Hypertension - Overview",
+        "order": 1,
+        "xpReward": 15,
+        "estimatedTime": "25 min",
+        "infoPage": {
+          "goal": "Understand the definition, symptoms, causes, diagnosis, and treatment of Pulmonary Hypertension.",
+          "characters": ["Ava - First-year med student", "Dr. Ryan - Pulmonologist", "Maryam - Patient"],
+          "scenes": [
+            {
+              "sceneTitle": "Scene 1: What is Pulmonary Hypertension?",
+              "dialogue": [
+                "Ava: I saw a patient who was breathless during a short walk.",
+                "Dr. Ryan: That might be Pulmonary Hypertension—high pressure in the pulmonary arteries.",
+                "Ava: I thought high blood pressure affected the whole body.",
+                "Dr. Ryan: This one is lung-specific. Different mechanism entirely."
+              ],
+              "question": {
+                "type": "multiple-choice",
+                "text": "Which of the following best defines Pulmonary Hypertension?",
+                "options": [
+                  "Increased pressure in pulmonary veins",
+                  "Increased pressure in pulmonary arteries",
+                  "Increased pressure in the left ventricle"
+                ],
+                "correctAnswer": 1,
+                "explanation": "Pulmonary hypertension specifically refers to elevated pressure in the pulmonary arteries, which carry blood from the heart to the lungs."
+              }
+            },
+            {
+              "sceneTitle": "Scene 2: Recognizing the Symptoms",
+              "dialogue": [
+                "Maryam: I can't even climb stairs anymore without getting winded.",
+                "Ava: No asthma history? That's strange.",
+                "Dr. Ryan: Gradual shortness of breath during activity is a classic sign.",
+                "Maryam: It started as just feeling tired, then got progressively worse."
+              ],
+              "question": {
+                "type": "multiple-choice",
+                "text": "What symptom is most commonly seen in Pulmonary Hypertension?",
+                "options": [
+                  "Severe dry cough",
+                  "Shortness of breath during activity",
+                  "Chest pain at rest"
+                ],
+                "correctAnswer": 1,
+                "explanation": "Progressive dyspnea (shortness of breath) on exertion is the most common presenting symptom of pulmonary hypertension."
+              }
+            },
+            {
+              "sceneTitle": "Scene 3: Understanding the Causes",
+              "dialogue": [
+                "Ava: What causes this pressure to rise?",
+                "Dr. Ryan: Lung damage, blood clots, or conditions affecting the right heart.",
+                "Ava: Like fibrosis or autoimmune diseases?",
+                "Dr. Ryan: Exactly. COPD and connective tissue diseases are common causes."
+              ],
+              "question": {
+                "type": "multiple-choice", 
+                "text": "Which of the following is NOT a known cause of pulmonary hypertension?",
+                "options": [
+                  "Chronic Obstructive Pulmonary Disease (COPD)",
+                  "Right heart failure",
+                  "Iron-deficiency anemia"
+                ],
+                "correctAnswer": 2,
+                "explanation": "While iron-deficiency anemia can cause fatigue and shortness of breath, it's not a direct cause of pulmonary hypertension."
+              }
+            },
+            {
+              "sceneTitle": "Scene 4: Diagnostic Approach",
+              "dialogue": [
+                "Maryam: What test will confirm if I have this?",
+                "Dr. Ryan: Right heart catheterization is the gold standard for diagnosis.",
+                "Ava: What about echocardiography?",
+                "Dr. Ryan: Echo is useful for screening, but catheterization gives us exact pressures."
+              ],
+              "question": {
+                "type": "multiple-choice",
+                "text": "Which test is considered definitive for diagnosing pulmonary hypertension?",
+                "options": [
+                  "Echocardiogram",
+                  "Chest X-ray",
+                  "Right heart catheterization"
+                ],
+                "correctAnswer": 2,
+                "explanation": "Right heart catheterization directly measures pulmonary artery pressures and is the definitive diagnostic test."
+              }
+            },
+            {
+              "sceneTitle": "Scene 5: Treatment Options",
+              "dialogue": [
+                "Ava: Is this condition curable?",
+                "Dr. Ryan: Not always curable, but very manageable with proper treatment.",
+                "Maryam: What kind of treatments are available?",
+                "Dr. Ryan: We have several medication classes and sometimes oxygen therapy for severe cases."
+              ],
+              "question": {
+                "type": "multiple-choice",
+                "text": "Which medication class is commonly used in pulmonary hypertension treatment?",
+                "options": [
+                  "PDE-5 inhibitors",
+                  "Antiplatelet drugs",
+                  "Beta-blockers"
+                ],
+                "correctAnswer": 0,
+                "explanation": "PDE-5 inhibitors like sildenafil help dilate pulmonary blood vessels and reduce pressure."
+              }
+            }
+          ],
+          "finalReview": [
+            {
+              "type": "multiple-choice",
+              "text": "Which factor can contribute to developing pulmonary hypertension?",
+              "options": [
+                "Chronic smoking",
+                "Eating fatty foods",
+                "Frequent migraines"
+              ],
+              "correctAnswer": 0,
+              "explanation": "Chronic smoking can lead to COPD, which is a major risk factor for pulmonary hypertension."
+            },
+            {
+              "type": "multiple-choice", 
+              "text": "How does pulmonary hypertension affect the right ventricle?",
+              "options": [
+                "It becomes smaller over time",
+                "It is forced to pump harder against increased resistance",
+                "It stops functioning without warning"
+              ],
+              "correctAnswer": 1,
+              "explanation": "The right ventricle must work harder to pump blood through high-pressure pulmonary arteries, leading to right heart strain."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
