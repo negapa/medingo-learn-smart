@@ -4,12 +4,13 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Stethoscope, ArrowLeft } from 'lucide-react';
+import { useUser } from '@/contexts/UserContext';
 
-const SignUp = () => {
+const SignIn = () => {
   const navigate = useNavigate();
+  const { login } = useUser();
   const [formData, setFormData] = useState({
     username: '',
-    email: '',
     password: '',
   });
 
@@ -19,11 +20,32 @@ const SignUp = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (formData.username && formData.email && formData.password) {
-      // Store partial user data in localStorage temporarily
-      localStorage.setItem('medingo_signup_temp', JSON.stringify(formData));
-      navigate('/signup/details');
+    
+    // Check for hardcoded test account
+    if (formData.username === 'test' && formData.password === 'testpass') {
+      const testUserData = {
+        username: 'test',
+        email: 'test@medingo.com',
+        major: 'Medicine (MD)',
+        semester: '3rd Semester',
+        university: 'Medingo University',
+        studentId: 'TEST123',
+        xp: 150,
+        streak: 3,
+        level: 2,
+        completedLessons: ['pulmonary_hypertension_1'],
+        selectedSubjects: ['lungs_basics', 'pharmacology', 'pathology', 'anatomy'],
+        lastActiveDate: new Date().toISOString().split('T')[0],
+      };
+      
+      login(testUserData);
+      navigate('/dashboard');
+      return;
     }
+    
+    // For regular users, you could add real authentication here
+    // For now, just navigate to sign up if credentials don't match test account
+    navigate('/signup');
   };
 
   return (
@@ -41,14 +63,14 @@ const SignUp = () => {
             </div>
             <span className="text-3xl font-bold text-foreground">Medingo</span>
           </div>
-          <h1 className="text-2xl font-bold text-foreground mb-2">Create your account</h1>
-          <p className="text-muted-foreground">Start your medical learning journey</p>
+          <h1 className="text-2xl font-bold text-foreground mb-2">Welcome back</h1>
+          <p className="text-muted-foreground">Sign in to continue your learning journey</p>
         </div>
 
-        {/* Sign Up Form */}
+        {/* Sign In Form */}
         <Card className="shadow-card">
           <CardHeader>
-            <CardTitle className="text-xl text-center">Sign Up</CardTitle>
+            <CardTitle className="text-xl text-center">Sign In</CardTitle>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -65,22 +87,10 @@ const SignUp = () => {
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-medium text-foreground">Email</label>
-                <Input
-                  type="email"
-                  placeholder="Enter your email"
-                  value={formData.email}
-                  onChange={(e) => handleInputChange('email', e.target.value)}
-                  className="h-12"
-                  required
-                />
-              </div>
-
-              <div className="space-y-2">
                 <label className="text-sm font-medium text-foreground">Password</label>
                 <Input
                   type="password"
-                  placeholder="Create a strong password"
+                  placeholder="Enter your password"
                   value={formData.password}
                   onChange={(e) => handleInputChange('password', e.target.value)}
                   className="h-12"
@@ -92,16 +102,16 @@ const SignUp = () => {
                 type="submit" 
                 size="lg" 
                 className="w-full"
-                disabled={!formData.username || !formData.email || !formData.password}
+                disabled={!formData.username || !formData.password}
               >
-                Continue
+                Sign In
               </Button>
             </form>
 
-            {/* Quick Test Login */}
+            {/* Test Account Info */}
             <div className="mt-6 pt-6 border-t border-border">
               <div className="text-center mb-4">
-                <p className="text-sm text-muted-foreground">Quick test login:</p>
+                <p className="text-sm text-muted-foreground">Test account credentials:</p>
                 <div className="text-xs text-muted-foreground mt-1">
                   Username: <code className="bg-muted px-1 rounded">test</code> | 
                   Password: <code className="bg-muted px-1 rounded">testpass</code>
@@ -113,52 +123,26 @@ const SignUp = () => {
                 size="lg" 
                 className="w-full"
                 onClick={() => {
-                  const testData = {
-                    username: 'test',
-                    email: 'test@medingo.com',
-                    password: 'testpass'
-                  };
-                  localStorage.setItem('medingo_signup_temp', JSON.stringify(testData));
-                  navigate('/signup/details');
+                  setFormData({ username: 'test', password: 'testpass' });
                 }}
               >
-                Use Test Account
+                Use Test Credentials
               </Button>
             </div>
 
             <div className="mt-4 text-center">
               <p className="text-sm text-muted-foreground">
-                Already have an account?{' '}
-                <Link to="/signin" className="text-primary hover:underline font-medium">
-                  Sign in
+                Don't have an account?{' '}
+                <Link to="/signup" className="text-primary hover:underline font-medium">
+                  Sign up
                 </Link>
               </p>
             </div>
           </CardContent>
         </Card>
-
-        {/* Demo Login */}
-        <div className="mt-6 text-center">
-          <p className="text-xs text-muted-foreground mb-2">Quick demo access:</p>
-          <Button 
-            variant="outline" 
-            size="sm"
-            onClick={() => {
-              const demoData = {
-                username: 'demo_student',
-                email: 'demo@medingo.com',
-                password: 'demo123'
-              };
-              localStorage.setItem('medingo_signup_temp', JSON.stringify(demoData));
-              navigate('/signup/details');
-            }}
-          >
-            Try Demo Account
-          </Button>
-        </div>
       </div>
     </div>
   );
 };
 
-export default SignUp;
+export default SignIn;

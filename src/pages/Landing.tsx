@@ -17,7 +17,7 @@ const Landing = () => {
             <span className="text-2xl font-bold text-foreground">Medingo</span>
           </div>
           <div className="flex items-center gap-4">
-            <Link to="/signup">
+            <Link to="/signin">
               <Button variant="outline" size="default">
                 Sign In
               </Button>
@@ -51,9 +51,11 @@ const Landing = () => {
                   <Brain className="w-5 h-5 ml-2 group-hover:rotate-12 transition-transform" />
                 </Button>
               </Link>
-              <Button variant="outline" size="xl">
-                How it Works
-              </Button>
+              <Link to="/signin">
+                <Button variant="outline" size="xl">
+                  Sign In
+                </Button>
+              </Link>
             </div>
 
             {/* Features */}

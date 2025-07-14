@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { UserProvider } from "./contexts/UserContext";
 import Landing from "./pages/Landing";
 import SignUp from "./pages/SignUp";
+import SignIn from "./pages/SignIn";
 import SignUpDetails from "./pages/SignUpDetails";
 import SubjectSelection from "./pages/SubjectSelection";
 import Dashboard from "./pages/Dashboard";
@@ -27,6 +28,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/signin" element={<SignIn />} />
             <Route path="/signup/details" element={<SignUpDetails />} />
             <Route path="/subjects" element={<SubjectSelection />} />
             <Route path="/dashboard" element={<Dashboard />} />

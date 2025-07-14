@@ -16,6 +16,7 @@ const Lesson = () => {
   const [currentScene, setCurrentScene] = useState(0);
   const [currentDialogueLine, setCurrentDialogueLine] = useState(0);
   const [showQuestion, setShowQuestion] = useState(false);
+  const [showAllDialogue, setShowAllDialogue] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [showAnswer, setShowAnswer] = useState(false);
   const [lessonCompleted, setLessonCompleted] = useState(false);
@@ -56,6 +57,7 @@ const Lesson = () => {
       setCurrentDialogueLine(prev => prev + 1);
     } else {
       setShowQuestion(true);
+      setShowAllDialogue(true);
     }
   };
 
@@ -77,6 +79,7 @@ const Lesson = () => {
         setCurrentScene(prev => prev + 1);
         setCurrentDialogueLine(0);
         setShowQuestion(isInFinalReview || !scenes[currentScene + 1]?.dialogue);
+        setShowAllDialogue(false);
         setSelectedAnswer(null);
         setShowAnswer(false);
       } else {
@@ -109,12 +112,14 @@ const Lesson = () => {
   const handleBack = () => {
     if (showQuestion && currentDialogueLine > 0) {
       setShowQuestion(false);
+      setShowAllDialogue(false);
       setCurrentDialogueLine(prev => prev - 1);
     } else if (currentScene > 0) {
       setCurrentScene(prev => prev - 1);
       const prevScene = scenes[currentScene - 1];
       setCurrentDialogueLine(prevScene?.dialogue ? prevScene.dialogue.length - 1 : 0);
       setShowQuestion(isInFinalReview || !prevScene?.dialogue);
+      setShowAllDialogue(false);
       setSelectedAnswer(null);
       setShowAnswer(false);
     }
@@ -243,30 +248,30 @@ const Lesson = () => {
             </CardHeader>
             
             <CardContent className="space-y-6">
-              {/* Animated Dialogue (only for story scenes) */}
+              {/* Progressive Dialogue (only for story scenes) */}
               {!isInFinalReview && currentContent.dialogue && !showQuestion && (
-                <div className="min-h-[300px] flex flex-col justify-center">
-                  <div className="flex items-end gap-4 mb-6">
-                    {/* Character avatars and dialogue bubble */}
-                    {(() => {
-                      const currentLine = currentContent.dialogue[currentDialogueLine];
-                      const speakerName = currentLine.split(':')[0];
-                      const dialogueText = currentLine.split(':').slice(1).join(':').trim();
+                <div className="min-h-[300px] max-h-[400px] overflow-y-auto">
+                  <div className="space-y-4">
+                    {currentContent.dialogue.slice(0, currentDialogueLine + 1).map((line: string, index: number) => {
+                      const speakerName = line.split(':')[0];
+                      const dialogueText = line.split(':').slice(1).join(':').trim();
                       const isLeftSpeaker = speakerName === 'Ava' || speakerName === 'Ali';
                       
                       return (
-                        <>
+                        <div key={index} className={`flex items-end gap-4 animate-fade-in ${
+                          isLeftSpeaker ? 'justify-start' : 'justify-end'
+                        }`}>
                           {isLeftSpeaker && (
                             <div className="flex flex-col items-center">
-                              <div className="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center mb-2">
-                                <User className="w-6 h-6 text-white" />
+                              <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center">
+                                <User className="w-5 h-5 text-white" />
                               </div>
-                              <span className="text-xs text-muted-foreground">{speakerName}</span>
+                              <span className="text-xs text-muted-foreground mt-1">{speakerName}</span>
                             </div>
                           )}
                           
-                          <div className={`flex-1 max-w-md ${isLeftSpeaker ? 'mr-auto' : 'ml-auto'}`}>
-                            <div className={`p-4 rounded-2xl animate-fade-in ${
+                          <div className={`max-w-md ${isLeftSpeaker ? 'mr-auto' : 'ml-auto'}`}>
+                            <div className={`p-3 rounded-2xl ${
                               isLeftSpeaker 
                                 ? 'bg-primary text-primary-foreground rounded-bl-sm' 
                                 : 'bg-muted text-foreground rounded-br-sm'
@@ -277,19 +282,19 @@ const Lesson = () => {
                           
                           {!isLeftSpeaker && (
                             <div className="flex flex-col items-center">
-                              <div className="w-12 h-12 bg-gradient-accent rounded-full flex items-center justify-center mb-2">
-                                <User className="w-6 h-6 text-white" />
+                              <div className="w-10 h-10 bg-gradient-accent rounded-full flex items-center justify-center">
+                                <User className="w-5 h-5 text-white" />
                               </div>
-                              <span className="text-xs text-muted-foreground">{speakerName}</span>
+                              <span className="text-xs text-muted-foreground mt-1">{speakerName}</span>
                             </div>
                           )}
-                        </>
+                        </div>
                       );
-                    })()}
+                    })}
                   </div>
                   
                   {/* Dialogue progress dots */}
-                  <div className="flex justify-center gap-2 mb-4">
+                  <div className="flex justify-center gap-2 mt-6">
                     {currentContent.dialogue.map((_: any, index: number) => (
                       <div 
                         key={index}
@@ -298,6 +303,25 @@ const Lesson = () => {
                         }`}
                       />
                     ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Full Dialogue History (when showing question) */}
+              {showQuestion && !isInFinalReview && currentContent.dialogue && (
+                <div className="mb-6 p-4 bg-muted/50 rounded-lg border max-h-[200px] overflow-y-auto">
+                  <div className="text-sm font-medium text-foreground mb-2">Conversation:</div>
+                  <div className="space-y-2 text-sm">
+                    {currentContent.dialogue.map((line: string, index: number) => {
+                      const speakerName = line.split(':')[0];
+                      const dialogueText = line.split(':').slice(1).join(':').trim();
+                      return (
+                        <div key={index} className="flex gap-2">
+                          <span className="font-medium text-muted-foreground">{speakerName}:</span>
+                          <span className="text-foreground">{dialogueText}</span>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               )}
