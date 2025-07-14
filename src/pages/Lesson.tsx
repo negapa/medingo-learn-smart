@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
-import { ArrowLeft, ArrowRight, CheckCircle, X, Trophy } from 'lucide-react';
+import { ArrowLeft, ArrowRight, CheckCircle, X, Trophy, User } from 'lucide-react';
 import { useUser } from '@/contexts/UserContext';
 import { toast } from '@/hooks/use-toast';
 import lessonsData from '@/data/lessons.json';
@@ -14,6 +14,8 @@ const Lesson = () => {
   const { user, addXP, completeLesson, updateStreak } = useUser();
   
   const [currentScene, setCurrentScene] = useState(0);
+  const [currentDialogueLine, setCurrentDialogueLine] = useState(0);
+  const [showQuestion, setShowQuestion] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [showAnswer, setShowAnswer] = useState(false);
   const [lessonCompleted, setLessonCompleted] = useState(false);
@@ -47,6 +49,16 @@ const Lesson = () => {
     ? lesson.infoPage.finalReview[currentScene - scenes.length]
     : scenes[currentScene];
 
+
+  const handleDialogueNext = () => {
+    const dialogue = scenes[currentScene]?.dialogue;
+    if (dialogue && currentDialogueLine < dialogue.length - 1) {
+      setCurrentDialogueLine(prev => prev + 1);
+    } else {
+      setShowQuestion(true);
+    }
+  };
+
   const handleAnswerSelect = (optionIndex: number) => {
     if (showAnswer) return;
     setSelectedAnswer(optionIndex);
@@ -63,26 +75,46 @@ const Lesson = () => {
     } else if (showAnswer) {
       if (currentScene < totalScenes - 1) {
         setCurrentScene(prev => prev + 1);
+        setCurrentDialogueLine(0);
+        setShowQuestion(isInFinalReview || !scenes[currentScene + 1]?.dialogue);
         setSelectedAnswer(null);
         setShowAnswer(false);
       } else {
-        // Lesson completed
-        completeLesson(lesson.lessonId);
-        addXP(lesson.xpReward);
-        updateStreak();
+        // Calculate performance-based XP
+        const accuracy = (score / totalScenes) * 100;
+        const xpEarned = accuracy >= 80 ? lesson.xpReward : Math.floor(lesson.xpReward * 0.5);
+        
+        // Check if user passed (50% or higher)
+        const passed = accuracy >= 50;
+        
+        if (passed) {
+          completeLesson(lesson.lessonId);
+          updateStreak();
+        }
+        
+        addXP(xpEarned);
         setLessonCompleted(true);
         
         toast({
-          title: "Lesson Completed!",
-          description: `You earned ${lesson.xpReward} XP!`,
+          title: passed ? "Lesson Completed!" : "Lesson Failed",
+          description: passed 
+            ? `You earned ${xpEarned} XP! Next lesson unlocked.`
+            : `You need 50% to pass. Retry to unlock the next lesson.`,
+          variant: passed ? "default" : "destructive"
         });
       }
     }
   };
 
   const handleBack = () => {
-    if (currentScene > 0) {
+    if (showQuestion && currentDialogueLine > 0) {
+      setShowQuestion(false);
+      setCurrentDialogueLine(prev => prev - 1);
+    } else if (currentScene > 0) {
       setCurrentScene(prev => prev - 1);
+      const prevScene = scenes[currentScene - 1];
+      setCurrentDialogueLine(prevScene?.dialogue ? prevScene.dialogue.length - 1 : 0);
+      setShowQuestion(isInFinalReview || !prevScene?.dialogue);
       setSelectedAnswer(null);
       setShowAnswer(false);
     }
@@ -117,20 +149,44 @@ const Lesson = () => {
             </div>
             
             <h2 className="text-2xl font-bold text-foreground mb-2">Lesson Complete!</h2>
-            <p className="text-muted-foreground mb-6">
-              You scored {score}/{totalScenes} correct answers
-            </p>
-            
-            <div className="space-y-3">
-              <div className="flex items-center justify-between text-sm">
-                <span>XP Earned:</span>
-                <span className="font-bold text-xp">+{lesson.xpReward}</span>
-              </div>
-              <div className="flex items-center justify-between text-sm">
-                <span>Accuracy:</span>
-                <span className="font-bold">{Math.round((score / totalScenes) * 100)}%</span>
-              </div>
-            </div>
+            {(() => {
+              const accuracy = Math.round((score / totalScenes) * 100);
+              const passed = accuracy >= 50;
+              const xpEarned = accuracy >= 80 ? lesson.xpReward : Math.floor(lesson.xpReward * 0.5);
+              
+              return (
+                <>
+                  <p className="text-muted-foreground mb-6">
+                    You scored {score}/{totalScenes} correct answers ({accuracy}%)
+                  </p>
+                  
+                  {!passed && (
+                    <div className="p-4 bg-destructive/10 border border-destructive/20 rounded-lg mb-6">
+                      <p className="text-sm text-destructive">
+                        You need at least 50% to unlock the next lesson. Try again!
+                      </p>
+                    </div>
+                  )}
+                  
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between text-sm">
+                      <span>XP Earned:</span>
+                      <span className="font-bold text-xp">+{xpEarned}</span>
+                    </div>
+                    <div className="flex items-center justify-between text-sm">
+                      <span>Accuracy:</span>
+                      <span className="font-bold">{accuracy}%</span>
+                    </div>
+                    <div className="flex items-center justify-between text-sm">
+                      <span>Status:</span>
+                      <span className={`font-bold ${passed ? 'text-completed' : 'text-destructive'}`}>
+                        {passed ? 'Passed' : 'Failed'}
+                      </span>
+                    </div>
+                  </div>
+                </>
+              );
+            })()}
             
             <div className="flex gap-3 mt-8">
               <Button 
@@ -187,55 +243,105 @@ const Lesson = () => {
             </CardHeader>
             
             <CardContent className="space-y-6">
-              {/* Dialogue (only for story scenes) */}
-              {!isInFinalReview && currentContent.dialogue && (
-                <div className="space-y-3">
-                  {currentContent.dialogue.map((line: string, index: number) => (
-                    <div key={index} className="p-3 bg-muted rounded-lg">
-                      <p className="text-foreground">{line}</p>
-                    </div>
-                  ))}
+              {/* Animated Dialogue (only for story scenes) */}
+              {!isInFinalReview && currentContent.dialogue && !showQuestion && (
+                <div className="min-h-[300px] flex flex-col justify-center">
+                  <div className="flex items-end gap-4 mb-6">
+                    {/* Character avatars and dialogue bubble */}
+                    {(() => {
+                      const currentLine = currentContent.dialogue[currentDialogueLine];
+                      const speakerName = currentLine.split(':')[0];
+                      const dialogueText = currentLine.split(':').slice(1).join(':').trim();
+                      const isLeftSpeaker = speakerName === 'Ava' || speakerName === 'Ali';
+                      
+                      return (
+                        <>
+                          {isLeftSpeaker && (
+                            <div className="flex flex-col items-center">
+                              <div className="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center mb-2">
+                                <User className="w-6 h-6 text-white" />
+                              </div>
+                              <span className="text-xs text-muted-foreground">{speakerName}</span>
+                            </div>
+                          )}
+                          
+                          <div className={`flex-1 max-w-md ${isLeftSpeaker ? 'mr-auto' : 'ml-auto'}`}>
+                            <div className={`p-4 rounded-2xl animate-fade-in ${
+                              isLeftSpeaker 
+                                ? 'bg-primary text-primary-foreground rounded-bl-sm' 
+                                : 'bg-muted text-foreground rounded-br-sm'
+                            }`}>
+                              <p className="text-sm leading-relaxed">{dialogueText}</p>
+                            </div>
+                          </div>
+                          
+                          {!isLeftSpeaker && (
+                            <div className="flex flex-col items-center">
+                              <div className="w-12 h-12 bg-gradient-accent rounded-full flex items-center justify-center mb-2">
+                                <User className="w-6 h-6 text-white" />
+                              </div>
+                              <span className="text-xs text-muted-foreground">{speakerName}</span>
+                            </div>
+                          )}
+                        </>
+                      );
+                    })()}
+                  </div>
+                  
+                  {/* Dialogue progress dots */}
+                  <div className="flex justify-center gap-2 mb-4">
+                    {currentContent.dialogue.map((_: any, index: number) => (
+                      <div 
+                        key={index}
+                        className={`w-2 h-2 rounded-full transition-colors ${
+                          index <= currentDialogueLine ? 'bg-primary' : 'bg-muted'
+                        }`}
+                      />
+                    ))}
+                  </div>
                 </div>
               )}
 
               {/* Question */}
-              <div className="space-y-4">
-                <h3 className="text-lg font-semibold text-foreground">
-                  {currentContent.question?.text || currentContent.text}
-                </h3>
+              {(showQuestion || isInFinalReview) && (
+                <div className="space-y-4 animate-fade-in">
+                  <h3 className="text-lg font-semibold text-foreground">
+                    {currentContent.question?.text || currentContent.text}
+                  </h3>
 
-                {/* Answer Options */}
-                <div className="space-y-3">
-                  {(currentContent.question?.options || currentContent.options)?.map((option: string, index: number) => (
-                    <button
-                      key={index}
-                      onClick={() => handleAnswerSelect(index)}
-                      disabled={showAnswer}
-                      className={`w-full p-4 text-left rounded-lg border-2 transition-all ${getOptionClass(index)}`}
-                    >
-                      <div className="flex items-center justify-between">
-                        <span>{option}</span>
-                        {showAnswer && index === (currentContent.question?.correctAnswer ?? currentContent.correctAnswer) && (
-                          <CheckCircle className="w-5 h-5 text-completed" />
-                        )}
-                        {showAnswer && index === selectedAnswer && index !== (currentContent.question?.correctAnswer ?? currentContent.correctAnswer) && (
-                          <X className="w-5 h-5 text-destructive" />
-                        )}
-                      </div>
-                    </button>
-                  ))}
-                </div>
-
-                {/* Explanation */}
-                {showAnswer && (currentContent.question?.explanation || currentContent.explanation) && (
-                  <div className="p-4 bg-primary/10 rounded-lg border border-primary/20">
-                    <p className="text-sm text-foreground">
-                      <strong>Explanation: </strong>
-                      {currentContent.question?.explanation || currentContent.explanation}
-                    </p>
+                  {/* Answer Options */}
+                  <div className="space-y-3">
+                    {(currentContent.question?.options || currentContent.options)?.map((option: string, index: number) => (
+                      <button
+                        key={index}
+                        onClick={() => handleAnswerSelect(index)}
+                        disabled={showAnswer}
+                        className={`w-full p-4 text-left rounded-lg border-2 transition-all ${getOptionClass(index)}`}
+                      >
+                        <div className="flex items-center justify-between">
+                          <span>{option}</span>
+                          {showAnswer && index === (currentContent.question?.correctAnswer ?? currentContent.correctAnswer) && (
+                            <CheckCircle className="w-5 h-5 text-completed" />
+                          )}
+                          {showAnswer && index === selectedAnswer && index !== (currentContent.question?.correctAnswer ?? currentContent.correctAnswer) && (
+                            <X className="w-5 h-5 text-destructive" />
+                          )}
+                        </div>
+                      </button>
+                    ))}
                   </div>
-                )}
-              </div>
+
+                  {/* Explanation */}
+                  {showAnswer && (currentContent.question?.explanation || currentContent.explanation) && (
+                    <div className="p-4 bg-primary/10 rounded-lg border border-primary/20 animate-fade-in">
+                      <p className="text-sm text-foreground">
+                        <strong>Explanation: </strong>
+                        {currentContent.question?.explanation || currentContent.explanation}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              )}
             </CardContent>
           </Card>
 
@@ -244,19 +350,26 @@ const Lesson = () => {
             <Button 
               variant="outline" 
               onClick={handleBack}
-              disabled={currentScene === 0}
+              disabled={currentScene === 0 && currentDialogueLine === 0 && !showQuestion}
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back
             </Button>
             
-            <Button 
-              onClick={handleNext}
-              disabled={!showAnswer && selectedAnswer === null}
-            >
-              {currentScene === totalScenes - 1 ? 'Complete Lesson' : showAnswer ? 'Next' : 'Check Answer'}
-              {currentScene < totalScenes - 1 && <ArrowRight className="w-4 h-4 ml-2" />}
-            </Button>
+            {!isInFinalReview && currentContent.dialogue && !showQuestion ? (
+              <Button onClick={handleDialogueNext}>
+                {currentDialogueLine < currentContent.dialogue.length - 1 ? 'Next' : 'Continue to Question'}
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            ) : (
+              <Button 
+                onClick={handleNext}
+                disabled={!showAnswer && selectedAnswer === null}
+              >
+                {currentScene === totalScenes - 1 ? 'Complete Lesson' : showAnswer ? 'Next' : 'Check Answer'}
+                {currentScene < totalScenes - 1 && <ArrowRight className="w-4 h-4 ml-2" />}
+              </Button>
+            )}
           </div>
         </div>
       </main>

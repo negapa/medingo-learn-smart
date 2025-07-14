@@ -96,7 +96,6 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
       level: newLevel,
     };
     setUser(updatedUser);
-    localStorage.setItem('medingo_user', JSON.stringify(updatedUser));
   };
 
   const completeLesson = (lessonId: string) => {
@@ -108,7 +107,6 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
       completedLessons: [...user.completedLessons, lessonId],
     };
     setUser(updatedUser);
-    localStorage.setItem('medingo_user', JSON.stringify(updatedUser));
   };
 
   const updateStreak = () => {

@@ -53,6 +53,11 @@ const MainDashboard = () => {
             <span className="text-2xl font-bold text-foreground">Medingo</span>
           </div>
           <div className="flex items-center gap-4">
+            {/* XP Display */}
+            <div className="flex items-center gap-2 bg-gradient-primary text-white px-3 py-1 rounded-full">
+              <Trophy className="w-4 h-4" />
+              <span className="text-sm font-bold">{user?.xp || 0} XP</span>
+            </div>
             <Link to="/profile">
               <Button variant="ghost" size="sm">Profile</Button>
             </Link>
@@ -169,6 +174,8 @@ const SubjectLessons = ({ subjectId }: { subjectId: string }) => {
   const getLessonStatus = (lessonId: string, index: number) => {
     const completed = user?.completedLessons?.includes(lessonId);
     const isFirst = index === 0;
+    
+    // Check if previous lesson was completed (strict unlocking)
     const previousCompleted = index === 0 || user?.completedLessons?.includes(subjectLessons[index - 1]?.lessonId);
     
     if (completed) return 'completed';

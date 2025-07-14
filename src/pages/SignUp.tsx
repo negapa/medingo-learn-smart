@@ -98,7 +98,35 @@ const SignUp = () => {
               </Button>
             </form>
 
-            <div className="mt-6 text-center">
+            {/* Quick Test Login */}
+            <div className="mt-6 pt-6 border-t border-border">
+              <div className="text-center mb-4">
+                <p className="text-sm text-muted-foreground">Quick test login:</p>
+                <div className="text-xs text-muted-foreground mt-1">
+                  Username: <code className="bg-muted px-1 rounded">test</code> | 
+                  Password: <code className="bg-muted px-1 rounded">testpass</code>
+                </div>
+              </div>
+              
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="w-full"
+                onClick={() => {
+                  const testData = {
+                    username: 'test',
+                    email: 'test@medingo.com',
+                    password: 'testpass'
+                  };
+                  localStorage.setItem('medingo_signup_temp', JSON.stringify(testData));
+                  navigate('/signup/details');
+                }}
+              >
+                Use Test Account
+              </Button>
+            </div>
+
+            <div className="mt-4 text-center">
               <p className="text-sm text-muted-foreground">
                 Already have an account?{' '}
                 <Link to="/signup" className="text-primary hover:underline font-medium">
